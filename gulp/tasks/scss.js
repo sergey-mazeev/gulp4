@@ -14,7 +14,7 @@ scss.compiler = require('node-sass');
 const concatBlocks = () =>
     src(`${paths.blocks}**/*.scss`)
         .pipe(concat('_blocks.scss'))
-        .pipe(dest(paths.scss.src));
+        .pipe(dest(`${paths.scss.src}helpers/`));
 
 const vendorExt = () =>
     src(`${paths.scss.src}vendor/*.css`)
@@ -25,7 +25,7 @@ const vendorExt = () =>
 
 const buildCss = () =>
     src(['*.scss', '!_*.scss', 'helpers/*.scss', '!helpers/_*.scss'], {cwd: paths.scss.src})
-        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(scss().on('error', scss.logError))
         .pipe(gulpif(production, minify()))
         .pipe(sourcemaps.write('./maps'))
