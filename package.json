@@ -25,8 +25,10 @@
     "del": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-favicons": "^2.3.0",
+    "gulp-if": "^2.0.2",
     "gulp-plumber": "^1.2.1",
     "gulp-pug": "^4.0.1",
     "gulp-rename": "^1.4.0",
@@ -34,11 +36,15 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-ttf2woff": "^1.1.1",
     "gulp-ttf2woff2": "^2.0.2",
-    "node-sass": "^4.11.0"
+    "node-sass": "^4.11.0",
+    "yargs": "^12.0.5"
   },
   "babel": {
     "presets": [
       "env"
     ]
+  },
+  "dependencies": {
+    "npm": "^6.6.0"
   }
 }
