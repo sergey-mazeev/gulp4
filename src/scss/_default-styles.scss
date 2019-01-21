@@ -1,0 +1,28 @@
+html {
+  &.html_scroll-lock {
+	position: fixed;
+	overflow-y: scroll;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+  }
+}
+
+body {
+  font-family: $base-font;
+  color: #000000;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+//<editor-fold desc="Section">
+
+//</editor-fold>
+

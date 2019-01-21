@@ -1,0 +1,617 @@
+// Mixins
+
+@mixin mtop($multiplier: 1, $firstlast: true) {
+	margin-top: $base-vertical-margin * $multiplier;
+	@if $firstlast {
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+}
+@mixin mbot($multiplier: 1, $firstlast: true) {
+	margin-bottom: $base-vertical-margin * $multiplier;
+	@if $firstlast {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+@mixin margin($multiplier: 1, $firstlast: true) {
+	margin-top: $base-vertical-margin * $multiplier;
+	margin-bottom: $base-vertical-margin * $multiplier;
+	@if $firstlast {
+		&:first-child {
+			margin-top: 0;
+		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+@mixin ptop($multiplier: 1) {
+	padding-top: $base-vertical-margin * $multiplier;
+}
+@mixin pbot($multiplier: 1) {
+	padding-bottom: $base-vertical-margin * $multiplier;
+}
+@mixin padding($multiplier: 1) {
+	padding-top: $base-vertical-margin * $multiplier;
+	padding-bottom: $base-vertical-margin * $multiplier;
+}
+@mixin inline-block {
+	display: -moz-inline-stack; // ff 2
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+	_height: 15px; // ie 6-7
+}
+@mixin box-margin($margin) {
+	margin-top: $margin;
+	margin-bottom: $margin;
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+@mixin triangle-down($width, $height, $color) {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: $height $width/2 0 $width/2;
+	border-color: $color transparent transparent transparent;
+}
+@mixin fontface($name, $weight, $style, $fontname) {
+	font-family: $name;
+	src: url('../fonts/' + $fontname + '/' + $fontname + '.eot');
+	src: url('../fonts/' + $fontname + '/' + $fontname + '.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/' + $fontname + '/' + $fontname + '.woff') format('woff'),
+	url('../fonts/' + $fontname + '/' + $fontname + '.ttf') format('truetype'),
+	url('../fonts/' + $fontname + '/' + $fontname + '.svg') format('svg');
+	font-weight: $weight;
+	font-style: $style;
+}
+@mixin retinabg($url, $url2x, $size, $position, $repeat) {
+	background-image: url($fa-img-path + $url);
+	background-repeat: $repeat;
+	background-position: $position;
+	background-size: $size;
+	@media #{$media-retina} {
+		background-image: url($fa-img-path + $url2x);
+		background-size: $size;
+	}
+}
+@mixin fontsize($size, $lineheight: $line-height-base) {
+	font-size: $size;
+	line-height: $lineheight;
+}
+//- Media queries
+
+@mixin h768() {
+	@media screen and (max-height: 1023px) {
+		@content;
+	}
+}
+@mixin h480() {
+	@media screen and (max-height: 767px) {
+		@content;
+	}
+}
+@mixin h320() {
+	@media screen and (max-height: 600px) {
+		@content;
+	}
+}
+@mixin h200() {
+	@media screen and (max-height: 319px) {
+		@content;
+	}
+}
+@mixin w320() {
+	@media screen and (max-width: 479px) {
+		& {
+			@content;
+		}
+	}
+}
+@mixin w480() {
+	@media screen and (min-width: 479.1px) and (max-width: 767px) {
+		@content;
+	}
+}
+@mixin w768() {
+	@media screen and (min-width: 768px) and (max-width: 1023px) {
+		@content;
+	}
+}
+@mixin w1024() {
+	@media screen and (min-width: 1024px) and (max-width: 1230px) {
+		@content;
+	}
+}
+@mixin retina() {
+	@media all and (-webkit-min-device-pixel-ratio: 1.5) {
+		@content;
+	}
+}
+//- Retina backgrounds
+@mixin bgr($url, $ext, $width: 100%, $height: 100%) {
+	background-image: url($url + '.' + $ext);
+	
+	@include retina() {
+		background-image: url($url + '@2x.' + $ext);
+		background-size: $width $height;
+	}
+}
+@mixin bgrc($url, $ext) {
+	background-image: url($url + '.' + $ext);
+	
+	@include retina() {
+		background-image: url($url + '@2x.' + $ext);
+		background-size: cover;
+	}
+}
+@mixin bgrn($url, $ext) {
+	background-image: url($url + '.' + $ext);
+	
+	@include retina() {
+		background-image: url($url + '@2x.' + $ext);
+	}
+}
+@mixin mmtop($margin) {
+	margin-top: $margin;
+	
+	&:first-child {
+		margin-top: 0;
+	}
+}
+@mixin mmbottom($margin) {
+	margin-bottom: $margin;
+	
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+@mixin mmleft($margin) {
+	margin-left: $margin;
+	
+	&:first-child {
+		margin-left: 0;
+	}
+}
+@mixin mmright($margin) {
+	margin-right: $margin;
+	
+	&:last-child {
+		margin-right: 0;
+	}
+}
+@mixin placeholder() {
+	&::-webkit-input-placeholder {
+		@content;
+	}
+	&::-moz-placeholder {
+		@content;
+	}
+	&:-moz-placeholder {
+		@content;
+	}
+	&:-ms-input-placeholder {
+		@content;
+	}
+	&.ui-placeholder {
+		@content;
+	}
+}
+@mixin pie() {
+	behavior: url("./css/pie/pie.htc");
+	//- behavior: url("path/to/pie.php");
+}
+@mixin reset() {
+	margin: 0;
+	padding: 0;
+}
+@mixin reset-list() {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	
+	& > li {
+		margin: 0;
+		padding: 0;
+		
+		&:before {
+			content: none;
+		}
+	}
+}
+@mixin fontsize($size, $lineheight: $line-height-base) {
+	font-size: $size;
+	line-height: $lineheight;
+}
+@mixin clearfix {
+	&:after {
+		display: table;
+		content: ' ';
+		clear: both;
+	}
+	
+}
+@mixin width-fix($width) {
+	max-width: $width + px;
+	margin: 0 auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+@function calculatePecent($size) {
+	$remSize: $size / 16px;
+	@return $remSize * 100%;
+}
+@mixin font-size($size) {
+	font-size: $size;
+	font-size: calculatePecent($size);
+}
+@mixin trnsfrm($params...) {
+	-webkit-transform: $params;
+	-moz-transform: $params;
+	-ms-transform: $params;
+	-o-transform: $params;
+	transform: $params;
+}
+@mixin trn($params...) {
+	-moz-transition: $params;
+	-o-transition: $params;
+	-webkit-transition: $params;
+	-ms-transition: $params;
+	transition: $params;
+}
+@mixin trn_all($time: 200ms) {
+	-webkit-transition: all $time ease-in;
+	-o-transition: all $time ease-in;
+	-moz-transition: all $time ease-in;
+}
+@mixin background-gradient($position, $startColor: #3c3c3c, $endColor: #999) {
+	background-color: $startColor;
+	background-image: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+	background-image: -webkit-linear-gradient($position, $startColor, $endColor);
+	background-image: -moz-linear-gradient($position, $startColor, $endColor);
+	background-image: -ms-linear-gradient($position, $startColor, $endColor);
+	background-image: -o-linear-gradient($position, $startColor, $endColor);
+	background-image: linear-gradient($position, $startColor, $endColor);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}');
+}
+@mixin img-responsive {
+	max-width: 100%;
+	height: auto;
+}
+@mixin underline($color: $accent-color, $height: 1px, $position: 1px) {
+	position: relative;
+	&::after {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: $height;
+		background: $color;
+		left: 0;
+		bottom: $position;
+		transition: background-color .25s ease;
+	}
+}
+@mixin abs-center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+@mixin img-cover($width: 100%, $height: auto) {
+	width: $width;
+	height: $height;
+	position: relative;
+	overflow: hidden;
+	img {
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		min-height: 100%;
+		min-width: 100%;
+		height: 100%;
+		width: auto;
+	}
+}
+@mixin multiline-ellipsis($font-size: 16px, $line-height: 1.4, $lines-to-show:3, $width: 100%) {
+	display: block;
+	display: -webkit-box;
+	max-width: $width;
+	height: $font-size*$line-height*$lines-to-show;
+	margin: 0 auto;
+	font-size: $font-size;
+	line-height: $line-height;
+	-webkit-line-clamp: $lines-to-show;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+@mixin box-shadow($shadow) {
+	-webkit-box-shadow: $shadow;
+	-moz-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+///* BORDER RADIUS */
+@mixin border-radius($radius: 5px) {
+	-moz-border-radius: $radius;
+	-webkit-border-radius: $radius;
+	border-radius: $radius;
+}
+@mixin border-radius-top($radius: 5px) {
+	-webkit-border-top-left-radius: $radius;
+	-webkit-border-top-right-radius: $radius;
+	-moz-border-radius-topleft: $radius;
+	-moz-border-radius-topright: $radius;
+	border-top-left-radius: $radius;
+	border-top-right-radius: $radius;
+	
+	//-webkit-border-bottom-left-radius: 0;
+	//-webkit-border-bottom-right-radius: 0;
+	//-moz-border-radius-bottomleft: 0;
+	//-moz-border-radius-bottomright: 0;
+	//border-bottom-left-radius: 0;
+	//border-bottom-right-radius: 0;
+}
+@mixin border-radius-bottom($radius: 5px) {
+	-webkit-border-bottom-left-radius: $radius;
+	-webkit-border-bottom-right-radius: $radius;
+	-moz-border-radius-bottomleft: $radius;
+	-moz-border-radius-bottomright: $radius;
+	border-bottom-left-radius: $radius;
+	border-bottom-right-radius: $radius;
+	
+	//-webkit-border-top-left-radius: 0;
+	//-webkit-border-top-right-radius: 0;
+	//-moz-border-radius-topleft: 0;
+	//-moz-border-radius-topright: 0;
+	//border-top-left-radius: 0;
+	//border-top-right-radius: 0;
+}
+@mixin burger-w-text($burger-width: 52px, $burger-color: black, $burger-font: Arial) {
+	width: $burger-width;
+	cursor: pointer;
+	height: $burger-width * .69;
+	position: relative;
+	color: $burger-color;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	transition: all .35s ease;
+	text-transform: uppercase;
+	outline: none;
+	&::before,
+	&::after {
+		content: "";
+		display: block;
+		position: absolute;
+		width: 90%;
+		background-color: $burger-color;
+		left: 50%;
+		transform-origin: 50% 50%;
+		//height: $burger-width * .085;
+		height: 2px;
+		transition: all .35s ease;
+		transform: translateX(-50%);
+		margin-left: -1px;
+	}
+	&::before {
+		top: 0;
+		bottom: auto;
+	}
+	&::after {
+		bottom: 0;
+		top: auto;
+		@include retina {
+			bottom: 2px;
+		}
+	}
+	span {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		font-family: $burger-font;
+		width: 100%;
+		text-align: center;
+		transform: translateY(-50%);
+		transition: all .45s ease;
+		color: $burger-color;
+		font-size: $burger-width / 3;
+		font-weight: 700;
+		line-height: $burger-width * .6;
+		vertical-align: middle;
+		font-size: 15px;
+		
+		&::before,
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 100%;
+			background-color: $burger-color;
+			left: 50%;
+			transform-origin: 50% 50%;
+			//height: $burger-width * .085;
+			height: 2px;
+			transition: all .35s ease;
+			transform: translateX(-50%);
+			margin-left: -1px;
+		}
+		&::before {
+			top: 3px;
+			bottom: auto;
+		}
+		&::after {
+			bottom: 2px;
+			@include retina {
+				bottom: 4px;
+			}
+			top: auto;
+		}
+		
+	}
+	&:hover {
+		&::before,
+		&::after {
+			transform: translateX(-35%);
+		}
+		span {
+			transform: translateX(-10%) translateY(-50%)
+		}
+	}
+	&_open {
+		&::before,
+		&::after {
+			width: 100%;
+		}
+		span {
+			opacity: 0;
+		}
+		&::before {
+			transform: rotate(225deg) translateY(-50%) translateX(0);
+			top: 45%;
+			left: 0;
+		}
+		&::after {
+			transform: rotate(-225deg) translateY(50%) translateX(0);
+			bottom: 45%;
+			left: 0;
+		}
+		&:hover {
+			&::before {
+				transform: rotate(225deg) translateY(-50%) translateX(0);
+			}
+			&::after {
+				transform: rotate(-225deg) translateY(50%) translateX(0);
+			}
+			transform: scale(.85);
+		}
+	}
+	// уберем hover на маленьких экранах, где точно touch
+	@media screen and ("max-width: 600px") {
+		&:hover {
+			&::before,
+			&::after {
+				transform: translateX(-50%);
+			}
+			span {
+				transform: translateY(-50%)
+			}
+		}
+		&_open:hover {
+			&::before {
+				transform: rotate(225deg) translateY(-50%) translateX(0);
+			}
+			&::after {
+				transform: rotate(-225deg) translateY(50%) translateX(0);
+			}
+			transform: scale(.85);
+		}
+	}
+	@content;
+}
+@mixin burger($burger-width: 36px, $burger-color: #000, $burger-thickness: 4px, $burger-radius: $burger-thickness / 2) {
+	position: relative;
+	width: $burger-width;
+	height: $burger-width * .65;
+	cursor: pointer;
+	background-color: transparent;
+	transition: all .45s ease;
+	&:before,
+	&:after {
+		content: "";
+		background: $burger-color;
+		backface-visibility: hidden;
+		height: $burger-thickness;
+		border-radius: $burger-radius;
+		left: 0;
+		width: 100%;
+		position: absolute;
+		transform-origin: 50% 50%;
+		transition: transform .45s ease, background-color .45s ease, box-shadow .45s ease;
+	}
+	&:before {
+		box-shadow: $burger-color 0 ($burger-width * .65 / 2 - $burger-thickness / 2) 0 0;
+		top: 0;
+	}
+	&:after {
+		bottom: 0;
+	}
+	&:hover {
+		&::before,
+		&::after {
+			transform: translateX(10%);
+		}
+		&::before {
+			box-shadow: $burger-color (-$burger-width * .2) ($burger-width * .65 / 2 - $burger-thickness / 2) 0 0;
+		}
+	}
+	@media screen and ("max-width: 600px") {
+		&:hover {
+			&::before,
+			&::after {
+				transform: translateX(0);
+			}
+			&::before {
+				box-shadow: $burger-color 0 ($burger-width * .65 / 2 - $burger-thickness / 2) 0 0;
+			}
+		}
+	}
+	&_open {
+		&:before {
+			box-shadow: transparent 0 0 0 0;
+			transform: translate(0, ($burger-width * .65 / 2 - $burger-thickness / 2)) rotate(225deg);
+		}
+		&:after {
+			transform: translate(0, -($burger-width * .65 / 2 - $burger-thickness / 2)) rotate(-225deg);
+		}
+		&:hover {
+			transform: scale(.9);
+			&:before {
+				box-shadow: transparent 0 0 0 0;
+				transform: translate(0, ($burger-width * .65 / 2 - $burger-thickness / 2)) rotate(225deg);
+			}
+			&:after {
+				transform: translate(0, -($burger-width * .65 / 2 - $burger-thickness / 2)) rotate(-225deg);
+			}
+		}
+	}
+	@content;
+}
+@mixin justify-block($block-width: 30%, $vertical-align: top, $font-size: 1rem, $line-height: 1.4, $margin-bottom: 0) {
+	text-align: justify;
+	font-size: 1px;
+	line-height: 0;
+	& > * {
+		display: inline-block;
+		width: $block-width;
+		vertical-align: $vertical-align;
+		font-size: $font-size;
+		line-height: $line-height;
+		margin-bottom: $margin-bottom;
+	}
+	&:after {
+		width: 100% !important;
+		height: 0 !important;
+		visibility: hidden !important;
+		overflow: hidden !important;
+		content: '' !important;
+		display: inline-block !important;
+	}
+}
+
+@mixin full_position {
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}

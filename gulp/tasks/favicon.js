@@ -12,11 +12,11 @@ const generateFavicon = () =>
             appShortName: name,
             appDescription: description,
             lang: 'ru_RU',
-            start_url: "/",
+            start_url: "",
             developerName: author,
             developerURL: authorUrl,
             background: "transparent",
-            path: "favicons/",
+            path: "favicon/",
             version: version,
             replace: true
         }))
