@@ -15,6 +15,10 @@ export default {
             src: 'src/scss/',
             built: 'built/css/',
         },
+        js: {
+            src: 'src/js/',
+            built: 'built/js/',
+        }
     },
 
     browsers: ['ie >= 10', 'ff >= 29', 'Opera >= 12', 'iOS >= 6', 'Chrome >= 28', 'Android >= 2'],
