@@ -1,2 +1,4 @@
 node_modules
 .idea
+built
+src/templates/layout/blocks.pug

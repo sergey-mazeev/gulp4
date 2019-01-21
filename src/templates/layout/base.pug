@@ -1,0 +1,46 @@
+//- Build time for cache reset
+- var timestamp = new Date().getTime();
+//---- Add blocks ----//
+include blocks
+doctype html
+html(lang='ru')
+	head
+		//- Meta
+		meta(charset='utf-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1')
+		meta(http-equiv='X-UA-Compatible' content='IE=edge')
+		meta(name='imagetoolbar' content='no')
+		meta(name='msthemecompatible' content='no')
+		meta(name='cleartype' content='on')
+		meta(name='HandheldFriendly' content='True')
+
+		meta(name='format-detection' content='telephone=no')
+		meta(name='format-detection' content='address=no')
+
+		meta(name='apple-mobile-web-app-capable' content='yes')
+		meta(name='apple-mobile-web-app-status-bar-style' content='black-translucent')
+
+		include favicon
+
+		link(href='css/main.css?' + timestamp rel='stylesheet')
+
+		include head_custom
+
+		block head
+
+	- var bodyClasses = [];
+	block beforeBody
+
+	body(class= bodyClasses)
+
+		block header
+
+		block content
+
+		block footer
+
+		block scripts
+
+		script(src='js/main.jquery.js?' + timestamp)
+
+		include bottom_custom

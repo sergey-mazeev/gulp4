@@ -1,0 +1,28 @@
+extends main/page_default
+
+block head
+	title Все страницы
+
+block beforeBody
+	-bodyClasses.push('not-front')
+
+block header
+
+block content
+
+
+	.container
+
+		#content.content_sidebar(style="min-height: 700px")
+			br
+			br
+			br
+			a(href="#").open-all-links Открыть все ссылки
+			br
+			br
+			br
+			ol(style="padding-left: 20px")
+				li: a(href="main.html").test Главная
+
+
+block footer

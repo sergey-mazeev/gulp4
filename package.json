@@ -18,6 +18,19 @@
   },
   "homepage": "https://github.com/sergey-mazeev/gulp4#readme",
   "devDependencies": {
-    "gulp": "^4.0.0"
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-pug": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   }
 }
