@@ -13,7 +13,9 @@ scss.compiler = require('node-sass');
 
 const concatBlocks = () =>
     src(`${paths.blocks}**/*.scss`)
+        .pipe(sourcemaps.init())
         .pipe(concat('_blocks.scss'))
+        .pipe(sourcemaps.write('.'))
         .pipe(dest(`${paths.scss.src}helpers/`));
 
 const vendorExt = () =>

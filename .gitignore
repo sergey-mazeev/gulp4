@@ -2,3 +2,5 @@ node_modules
 .idea
 built
 src/templates/layout/blocks.pug
+src/scss/helpers/_blocks.scss
+src/scss/helpers/_blocks.scss.map
