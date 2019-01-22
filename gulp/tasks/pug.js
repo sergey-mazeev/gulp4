@@ -6,7 +6,7 @@ import settings from '../config';
 
 const paths = settings.paths;
 
-const pugTemplate = () =>
+export const pugTemplate = () =>
     src(`${paths.templates}*.pug`)
         .pipe(plumber(function (error) {
             console.log('Ошибка в сборке pug' + error.message);
@@ -16,7 +16,7 @@ const pugTemplate = () =>
         }))
         .pipe(dest(paths.built));
 
-const pugBlocksConcat = () =>
+export const pugBlocksConcat = () =>
     src(`${paths.blocks}**/*.pug`)
         .pipe(concat(`blocks.pug`))
         .pipe(dest(`${paths.templates}layout/`));

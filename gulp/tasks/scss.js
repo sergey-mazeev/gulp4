@@ -11,21 +11,21 @@ import {production} from '../../gulpfile.babel';
 const {paths} = settings;
 scss.compiler = require('node-sass');
 
-const concatBlocks = () =>
+export const concatBlocks = () =>
     src(`${paths.blocks}**/*.scss`)
         .pipe(sourcemaps.init())
         .pipe(concat('_blocks.scss'))
         .pipe(sourcemaps.write('.'))
         .pipe(dest(`${paths.scss.src}helpers/`));
 
-const vendorExt = () =>
+export const vendorExt = () =>
     src(`${paths.scss.src}vendor/*.css`)
         .pipe(rename(function (path) {
             path.extname = '.scss';
         }))
         .pipe(dest(`${paths.scss.src}vendor/`));
 
-const buildCss = () =>
+export const buildCss = () =>
     src(['*.scss', '!_*.scss', 'helpers/*.scss', '!helpers/_*.scss'], {cwd: paths.scss.src})
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(scss().on('error', scss.logError))
