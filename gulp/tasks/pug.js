@@ -2,18 +2,26 @@ import {dest, series, src} from 'gulp';
 import pug from 'gulp-pug';
 import concat from 'gulp-concat';
 import plumber from 'gulp-plumber';
+import notify from 'gulp-notify';
+
 import settings from '../config';
 
 const paths = settings.paths;
 
 export const pugTemplate = () =>
     src(`${paths.templates}*.pug`)
-        .pipe(plumber(function (error) {
-            console.log('Ошибка в сборке pug' + error.message);
+        .pipe(plumber({
+            errorHandler: function (err) {
+                notify.onError({
+                    title: 'Ошибка Pug',
+                    message: '<%= error.message %>',
+                })(err);
+            }
         }))
         .pipe(pug({
             pretty: true,
         }))
+        .pipe(plumber.stop())
         .pipe(dest(paths.built));
 
 export const pugBlocksConcat = () =>
@@ -21,4 +29,6 @@ export const pugBlocksConcat = () =>
         .pipe(concat(`blocks.pug`))
         .pipe(dest(`${paths.templates}layout/`));
 
-export default series(pugBlocksConcat, pugTemplate);
+const buildPug = series(pugBlocksConcat, pugTemplate);
+
+export default buildPug;
