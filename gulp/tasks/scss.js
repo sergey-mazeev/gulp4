@@ -5,7 +5,6 @@ import sourcemaps from 'gulp-sourcemaps';
 import rename from 'gulp-rename';
 import minify from 'gulp-clean-css';
 import gulpif from 'gulp-if';
-import browserSync from 'browser-sync';
 
 import settings from '../config';
 import {production} from '../../gulpfile.babel';
@@ -33,8 +32,7 @@ export const buildCss = () =>
         .pipe(scss().on('error', scss.logError))
         .pipe(gulpif(production, minify()))
         .pipe(sourcemaps.write('./maps'))
-        .pipe(dest(`${paths.scss.built}`))
-        .pipe(browserSync.stream());
+        .pipe(dest(`${paths.scss.built}`));
 
 const css = series(concatBlocks, vendorExt, buildCss);
 

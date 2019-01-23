@@ -18,6 +18,10 @@ export default {
         js: {
             src: 'src/js/',
             built: 'built/js/',
+        },
+        img: {
+            src: 'src/img/',
+            built: 'built/img/',
         }
     },
 

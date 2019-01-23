@@ -7,6 +7,7 @@ import clear from './gulp/tasks/clean';
 import webfonts from './gulp/tasks/fonts';
 import {buildCss, concatBlocks as scssBlocksConcat, default as css, vendorExt} from './gulp/tasks/scss';
 import javascript from './gulp/tasks/js';
+import img from './gulp/tasks/img';
 import serve from './gulp/tasks/browsersync';
 
 import settings from './gulp/config';
@@ -26,10 +27,11 @@ export const watchFiles = () => {
     watch(`${paths.js.src}**/*.js`, javascript);
 };
 
-export const build = series(clear, parallel(favicon, webfonts, pug, css, javascript));
+
+export const build = series(clear, parallel(img, favicon, webfonts, pug, css, javascript));
 
 export const dev = series(build, parallel(watchFiles, serve));
 
-export const test = series(favicon);
+export const test = series(img);
 
 export default dev;

@@ -7,7 +7,7 @@ const serve = () => browserSync({
         baseDir: settings.paths.built,
         directory: false
     },
-    files: `${settings.paths.built}*.html`,
+    files: `${settings.paths.built}**/*.*`,
 });
 
 export default serve;
