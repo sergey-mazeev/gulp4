@@ -3,6 +3,7 @@ import imgMin from 'gulp-image';
 import newer from 'gulp-newer';
 import changed from 'gulp-changed';
 import gulpif from 'gulp-if';
+import debug from 'gulp-debug';
 
 import settings from '../config';
 import {production} from '../../gulpfile.babel';
@@ -22,11 +23,16 @@ const imgMinOptions = {
     concurrent: 5
 };
 
-const img = () =>
-    src(paths.img.src)
-        .pipe(newer(paths.img.built))
-        //.pipe(changed(paths.img.built))
-        .pipe(gulpif(production, imgMin(imgMinOptions)))
+export const img = () =>
+    src(`${paths.img.src}**/*.{jpg,png,svg,gif}`)
+        .pipe(gulpif(production, imgMin(imgMinOptions), changed(paths.img.built)))
         .pipe(dest(paths.img.built));
+
+export const imgMinimization = (done) => {
+    src(`${paths.img.src}**/*.{jpg,png,svg,gif}`)
+        .pipe(imgMin(imgMinOptions))
+        .pipe(dest(paths.img.built));
+    done();
+};
 
 export default img;

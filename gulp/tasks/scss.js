@@ -5,6 +5,7 @@ import sourcemaps from 'gulp-sourcemaps';
 import rename from 'gulp-rename';
 import minify from 'gulp-clean-css';
 import gulpif from 'gulp-if';
+import autoprefixer from 'gulp-autoprefixer';
 
 import settings from '../config';
 import {production} from '../../gulpfile.babel';
@@ -30,8 +31,11 @@ export const buildCss = () =>
     src(['*.scss', '!_*.scss', 'helpers/*.scss', '!helpers/_*.scss'], {cwd: paths.scss.src})
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(scss().on('error', scss.logError))
-        .pipe(gulpif(production, minify()))
         .pipe(sourcemaps.write('./maps'))
+        .pipe(gulpif(production, autoprefixer({
+            browsers: settings.browsers,
+        })))
+        .pipe(gulpif(production, minify()))
         .pipe(dest(`${paths.scss.built}`));
 
 const css = series(concatBlocks, vendorExt, buildCss);

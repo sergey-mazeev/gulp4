@@ -25,7 +25,7 @@ export const pugTemplate = () =>
         .pipe(dest(paths.built));
 
 export const pugBlocksConcat = () =>
-    src(`${paths.blocks}**/*.pug`, {since: lastRun('pugBlocksConcat')})
+    src(`${paths.blocks}**/*.pug`)
         .pipe(concat(`blocks.pug`))
         .pipe(dest(`${paths.templates}layout/`));
 
