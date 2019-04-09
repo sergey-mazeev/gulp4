@@ -13,10 +13,12 @@ export default {
         },
         scss: {
             src: 'src/scss/',
+            vendor: 'src/scss/vendor',
             built: 'built/css/',
         },
         js: {
             src: 'src/js/',
+            vendor: 'src/js/vendor',
             built: 'built/js/',
         },
         img: {

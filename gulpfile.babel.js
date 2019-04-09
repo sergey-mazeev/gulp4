@@ -9,14 +9,18 @@ import {buildCss, concatBlocks as scssBlocksConcat, default as css, vendorExt} f
 import javascript from './gulp/tasks/js';
 import {img, imgMinimization} from './gulp/tasks/img';
 import serve from './gulp/tasks/browsersync';
+import vendor from './gulp/tasks/vendor';
 
 import settings from './gulp/config';
 
 const {paths} = settings;
 
-const argv = yargs.argv;
+// todo: Разобраться с синтаксисом. Оба варианта не работают
+// const argv = yargs.argv;
+const argv = require('yargs').argv;
 export const production = !!argv.production;
 export const babelFlag = !!argv.babel;
+export const cms = !!argv.cms ;
 
 export const watchFiles = () => {
     watch(`${paths.blocks}**/*.pug`, pugBlocksConcat);
@@ -29,9 +33,9 @@ export const watchFiles = () => {
 };
 
 
-export const build = series(clear, parallel(imgMinimization, favicon, webfonts, pug, css, javascript));
+export const build = series(clear, parallel(imgMinimization, favicon, webfonts, pug, css, javascript, vendor));
 
-export const test = series(img)
+export const test = series(img);
 
 export const dev = series(build, parallel(watchFiles, serve));
 
