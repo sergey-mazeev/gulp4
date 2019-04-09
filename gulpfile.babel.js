@@ -10,6 +10,8 @@ import javascript from './gulp/tasks/js';
 import vendor from './gulp/tasks/vendor';
 import {img, imgMinimization} from './gulp/tasks/img';
 import serve from './gulp/tasks/browsersync';
+import log from 'fancy-log';
+import color from 'gulp-color';
 
 import settings from './gulp/config';
 
@@ -18,6 +20,16 @@ const {paths} = settings;
 const argv = yargs.argv;
 export const production = !!argv.production;
 export const babelFlag = !!argv.babel;
+
+
+const productionConsoleAlert = (cb) => {
+    if (production) {
+        log(color('=====================', 'MAGENTA'));
+        log.info(color('   Production Mode   ', 'CYAN'));
+        log(color('=====================', 'MAGENTA'));
+    }
+    cb();
+};
 
 export const watchFiles = () => {
     watch(`${paths.blocks}**/*.pug`, pugBlocksConcat);
@@ -30,11 +42,8 @@ export const watchFiles = () => {
 };
 
 
-export const build = series(clear, parallel(imgMinimization, favicon, webfonts, pug, css, javascript, vendor));
+export const build = series(productionConsoleAlert, clear, parallel(imgMinimization, favicon, webfonts, pug, css, javascript, vendor));
 
-export const dev = series(build, parallel(watchFiles, serve));
-
-export const del = series(clear);
-export const test = series(css);
+export const dev = series(build, parallel(watchFiles, serve, productionConsoleAlert));
 
 export default dev;

@@ -35,9 +35,6 @@ export const buildCss = () =>
         //.pipe(gulpif(production, autoprefixer({
         //    browsers: settings.browsers,
         //})))
-        .pipe(gulpif(production, function () {
-            console.log(production)
-        }))
         .pipe(gulpif(production, minify()))
         .pipe(dest(`${paths.scss.built}`));
 
