@@ -21,10 +21,12 @@ html(lang='ru')
 		meta(name='apple-mobile-web-app-status-bar-style' content='black-translucent')
 
 		include favicon
+		include vendor
+		each vendorStyle in vendorStyles
+			link(href= vendorStyle, rel='stylesheet')
+		link(href='css/main.css?' + timestamp rel='stylesheet')
 
 		include head_custom
-
-		link(href='css/main.css?' + timestamp rel='stylesheet')
 
 		block head
 
@@ -39,8 +41,10 @@ html(lang='ru')
 
 		block footer
 
-		block scripts
+		each vendorScript in vendorScripts
+			script(src= vendorScript)
 
+		block scripts
 		script(src='js/main.js?' + timestamp)
 
 		include bottom_custom

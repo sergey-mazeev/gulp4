@@ -8,6 +8,7 @@ import gulpif from 'gulp-if';
 import autoprefixer from 'gulp-autoprefixer';
 
 import settings from '../config';
+import {production} from '../../gulpfile.babel';
 
 const {paths} = settings;
 scss.compiler = require('node-sass');
@@ -19,34 +20,24 @@ export const concatBlocks = () =>
         .pipe(sourcemaps.write('.'))
         .pipe(dest(`${paths.scss.src}helpers/`));
 
-// todo: Сделать через импорт
-// import {cms, production} from '../../gulpfile.babel';
-const argv = require('yargs').argv;
-export const production = !!argv.production;
-const cms = !!argv.cms ;
-
-const isNotCms = () => {
-  if (typeof cms === "undefined" || cms === false) {
-    return true;
-  }
-  return false;
-};
-
 export const vendorExt = () =>
     src(`${paths.scss.src}vendor/*.css`)
-        .pipe(gulpif(isNotCms(), rename(function (path) {
-          path.extname = '.scss';
-        })))
-        .pipe(gulpif(isNotCms(), dest(`${paths.scss.src}vendor/`)));
+        .pipe(rename(function (path) {
+            path.extname = '.scss';
+        }))
+        .pipe(dest(`${paths.scss.src}vendor/`));
 
 export const buildCss = () =>
     src(['*.scss', '!_*.scss', 'helpers/*.scss', '!helpers/_*.scss'], {cwd: paths.scss.src})
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(scss().on('error', scss.logError))
         .pipe(sourcemaps.write('./maps'))
-        .pipe(gulpif(production, autoprefixer({
-            browsers: settings.browsers,
-        })))
+        //.pipe(gulpif(production, autoprefixer({
+        //    browsers: settings.browsers,
+        //})))
+        .pipe(gulpif(production, function () {
+            console.log(production)
+        }))
         .pipe(gulpif(production, minify()))
         .pipe(dest(`${paths.scss.built}`));
 

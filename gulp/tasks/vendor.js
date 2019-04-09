@@ -1,23 +1,17 @@
-import {dest, series, src} from 'gulp';
-
-const gulpif = require('gulp-if');
+import {dest, src, parallel} from 'gulp';
 
 import settings from '../config';
-const {paths} = settings;
 
-// todo: Сделать через импорт
-// import {cms} from '../../gulpfile.babel';
-const argv = require('yargs').argv;
-const cms = !!argv.cms ;
+const {jsVendor, cssVendor} = settings.paths;
 
-export const vendorCss = () =>
-  src(`${paths.scss.vendor}**/*.css`)
-    .pipe(gulpif(cms, dest(`${paths.scss.built}`)));
+const moveVendorJs = () =>
+    src((`${jsVendor.src}*.js`))
+        .pipe(dest(jsVendor.built));
 
-export const vendorJs = () =>
-  src(`${paths.js.vendor}**/*.js`)
-    .pipe(gulpif(cms, dest(`${paths.js.built}`)));
+const moveVendorCss = () =>
+    src((`${cssVendor.src}*.css`))
+        .pipe(dest(cssVendor.built));
 
-const vendor = series(vendorCss,vendorJs);
+const vendor = parallel(moveVendorJs, moveVendorCss);
 
 export default vendor;

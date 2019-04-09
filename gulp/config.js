@@ -13,13 +13,19 @@ export default {
         },
         scss: {
             src: 'src/scss/',
-            vendor: 'src/scss/vendor',
             built: 'built/css/',
+        },
+        cssVendor: {
+            src: 'src/scss/vendor/',
+            built: 'built/css/vendor/',
         },
         js: {
             src: 'src/js/',
-            vendor: 'src/js/vendor',
             built: 'built/js/',
+        },
+        jsVendor: {
+            src: 'src/js/vendor/',
+            built: 'built/js/vendor/',
         },
         img: {
             src: 'src/img/',

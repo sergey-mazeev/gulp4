@@ -7,20 +7,17 @@ import clear from './gulp/tasks/clean';
 import webfonts from './gulp/tasks/fonts';
 import {buildCss, concatBlocks as scssBlocksConcat, default as css, vendorExt} from './gulp/tasks/scss';
 import javascript from './gulp/tasks/js';
+import vendor from './gulp/tasks/vendor';
 import {img, imgMinimization} from './gulp/tasks/img';
 import serve from './gulp/tasks/browsersync';
-import vendor from './gulp/tasks/vendor';
 
 import settings from './gulp/config';
 
 const {paths} = settings;
 
-// todo: Разобраться с синтаксисом. Оба варианта не работают
-// const argv = yargs.argv;
-const argv = require('yargs').argv;
+const argv = yargs.argv;
 export const production = !!argv.production;
 export const babelFlag = !!argv.babel;
-export const cms = !!argv.cms ;
 
 export const watchFiles = () => {
     watch(`${paths.blocks}**/*.pug`, pugBlocksConcat);
@@ -35,8 +32,9 @@ export const watchFiles = () => {
 
 export const build = series(clear, parallel(imgMinimization, favicon, webfonts, pug, css, javascript, vendor));
 
-export const test = series(img);
-
 export const dev = series(build, parallel(watchFiles, serve));
+
+export const del = series(clear);
+export const test = series(css);
 
 export default dev;
