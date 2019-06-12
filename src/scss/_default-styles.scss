@@ -18,6 +18,36 @@ img {
 	height: auto;
 }
 
+//<editor-fold desc="Modal">
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100vh;
+	background-color: rgba(#000000, .7);
+	z-index: 99;
+	visibility: hidden;
+	opacity: 0;
+	transition: all .45s ease-out;
+	overflow-y: auto;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	&_shown {
+		opacity: 1;
+		visibility: visible;
+	}
+	
+	&__body {
+		background-color: #ffffff;
+		width: 500px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+//</editor-fold>
+
 //<editor-fold desc="Section">
 
 //</editor-fold>
