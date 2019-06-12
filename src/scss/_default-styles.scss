@@ -1,25 +1,21 @@
 html {
-  &.html_scroll-lock {
-	position: fixed;
-	overflow-y: scroll;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-  }
+	box-sizing: border-box;
 }
 
 body {
-  font-family: $base-font;
-  color: #000000;
-  font-size: 16px;
-  line-height: 1.4;
+	font-family: $base-font;
+	color: $base-text-color;
 }
 
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
 }
 
 //<editor-fold desc="Section">
