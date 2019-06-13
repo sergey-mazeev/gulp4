@@ -44,9 +44,13 @@ html(lang='ru')
 		block footer
 
 		each vendorScript in vendorScripts
-			script(src= vendorScript)
+			- var attributes = {};
+			- attributes.src = vendorScript[0]
+			- attributes.defer = vendorScript[1] === 'defer' ? 'defer' : 'false';
+			- attributes.async = vendorScript[1] === 'async' ? 'async' : 'false';
+			script&attributes(attributes)
 
 		block scripts
-		script(src='js/main.js?' + timestamp)
+		script(src='js/main.js?' + timestamp, defer="defer")
 
 		include bottom_custom
