@@ -260,17 +260,17 @@
 	-o-transform: $params;
 	transform: $params;
 }
-@mixin trn($params...) {
+@mixin trn_special($params...) {
 	-moz-transition: $params;
 	-o-transition: $params;
 	-webkit-transition: $params;
 	-ms-transition: $params;
 	transition: $params;
 }
-@mixin trn_all($time: 200ms) {
-	-webkit-transition: all $time ease-in;
-	-o-transition: all $time ease-in;
-	-moz-transition: all $time ease-in;
+@mixin trn($time: 200ms) {
+	-webkit-transition: all $time cubic-bezier(.5,0,.3,1);
+	-o-transition: all $time cubic-bezier(.5,0,.3,1);
+	-moz-transition: all $time cubic-bezier(.5,0,.3,1);
 }
 @mixin background-gradient($position, $startColor: #3c3c3c, $endColor: #999) {
 	background-color: $startColor;
@@ -614,4 +614,30 @@
 	height: 100%;
 	left: 0;
 	top: 0;
+}
+
+@mixin flex_columns($width: 50%, $gap: 15px) {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-left: -$gap;
+	margin-right: -$gap;
+	&>div {
+		max-width: $width;
+		margin-left: $gap;
+		margin-right: $gap;
+	}
+}
+
+@mixin text_inputs {
+	input[type="text"],
+	input[type="url"],
+	input[type="tel"],
+	input[type="number"],
+	input[type="email"],
+	input[type="color"],
+	input[type="password"] {
+		@content;
+	}
 }
