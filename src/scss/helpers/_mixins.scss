@@ -630,7 +630,7 @@
 	}
 }
 
-@mixin text_inputs {
+@mixin inputs_text {
 	input[type="text"],
 	input[type="url"],
 	input[type="tel"],
@@ -638,6 +638,26 @@
 	input[type="email"],
 	input[type="color"],
 	input[type="password"] {
+		border: 1px solid transparent;
+		@content;
+		&.error {
+			border-color: red;
+		}
+	}
+}
+
+@mixin inputs_submit {
+	input[type="submit"],
+	input[type="button"] {
 		@content;
 	}
+}
+
+@mixin sides_padding($width: 20px) {
+	padding-left: $width;
+	padding-right: $width;
+}
+@mixin sides_margin($width: 20px) {
+	margin-left: $width;
+	margin-right: $width;
 }
