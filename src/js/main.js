@@ -17,7 +17,7 @@ watchScrollY();
  ****************/
 
 window.addEventListener('load', () => {
-  const maskedPhonesInput = document.querySelectorAll('input[type="tel"]');
+  const maskedPhonesInput = document.querySelectorAll('input[type="tel"], .phone-mask');
   if (maskedPhonesInput) {
     const maskOptions = {
       mask: '+{7} (000) 000-00-00',
@@ -30,14 +30,16 @@ window.addEventListener('load', () => {
         }
       });
       // simple validation
-      el.addEventListener('blur', () => {
+      el.addEventListener('keyup', () => {
         if (maskedInput.unmaskedValue.length === 11) {
-          maskedInput.el.input.classList.add('input_valid')
+          maskedInput.el.input.classList.add('input_valid');
+          maskedInput.el.input.classList.remove('input_invalid');
         }
         else {
-          maskedInput.el.input.classList.add('input_invalid')
+          maskedInput.el.input.classList.add('input_invalid');
+          maskedInput.el.input.classList.remove('input_valid');
         }
-      })
+      });
     });
   }
 });
