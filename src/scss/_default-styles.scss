@@ -3,7 +3,7 @@ html {
 }
 
 body {
-	font-family: $base-font;
+	font-family: $font_base;
 	color: $base-text-color;
 }
 
@@ -18,7 +18,11 @@ img {
 	height: auto;
 }
 
-//<editor-fold desc="Modal">
+.container {
+
+}
+
+//region Modal
 .modal {
 	position: fixed;
 	top: 0;
@@ -46,9 +50,9 @@ img {
 	}
 }
 
-//</editor-fold>
+//endregion
 
-//<editor-fold desc="Section">
+//region Section
 
-//</editor-fold>
+//endregion
 

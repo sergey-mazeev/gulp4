@@ -1,28 +1,30 @@
 // fonts
 $arial: Arial, sans-serif;
-$base-font: "Roboto", "Helvetica", $arial;
-//$second-font: "HarmoniaSansProCyr";
+$font_base: "Roboto", "Helvetica", $arial;
+//$font_second: "HarmoniaSansProCyr";
 
 // grid
-$container: 1720px; // That's where fluid becomes fixed
+$containerPadding: 15px;
+$container: 1440px + $containerPadding*2; // That's where fluid becomes fixed
 $base-v-margin: 20px; // The mother of all margins. Usually = base line height
 
 // media
-$media-desktop: "screen and (max-width: 1210px)"; // 1024-1280
-$media-tablet: "screen and (max-width: 1023px)"; // 768-1024
-$media-phone-landscape: "screen and (max-width: 767px)"; // 480-767 (large phones included, ipad vertical - not)
-$media-phone: "screen and (max-width: 479px)"; // 320-479 (iphone 4 landscape not included)
-$media-retina: "screen and (min-device-pixel-ratio: 1.5), screen and (-webkit-min-device-pixel-ratio: 1.5)";
+$media_desktop: "screen and (min-width: 1024px)"; // 1024-∞
+$media_tablet: "screen and (max-width: 1023px)"; // 768-1024
+$media_phone-landscape: "screen and (max-width: 767px)"; // 480-767 (large phones included, ipad vertical - not)
+$media_phone: "screen and (max-width: 479px)"; // 320-479 (iphone 4 landscape not included)
+$media_retina: "screen and (min-device-pixel-ratio: 1.5), screen and (-webkit-min-device-pixel-ratio: 1.5)";
 $retina: "min-resolution: 1.5dppx";
 
 // custom color
 $c_purple: #a675f2;
 $c_red: #ff4167;
 
-$base-text-color: #333333;
-$second-text-color: #666666;
-$third-text-color: #666666;
-$accent-color: #f46464;
+// colors
+$color_base: #333333;
+$color_second: #666666;
+$color_third: #666666;
+$color_accent: #f46464;
 $blue: #64a8f4;
 $red: #f46464;
 $green: #5fbc63;
