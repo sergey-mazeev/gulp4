@@ -2,7 +2,6 @@ import {parallel, series, watch} from 'gulp';
 import yargs from 'yargs';
 
 import {default as pug, pugBlocksConcat, pugTemplate} from './gulp/tasks/pug';
-import favicon from './gulp/tasks/favicon';
 import clear from './gulp/tasks/clean';
 import webfonts from './gulp/tasks/fonts';
 import {buildCss, concatBlocks as scssBlocksConcat, default as css, vendorExt} from './gulp/tasks/scss';
@@ -42,7 +41,7 @@ export const watchFiles = () => {
 };
 
 
-export const build = series(productionConsoleAlert, clear, parallel(imgMinimization, favicon, webfonts, pug, css, javascript, vendor));
+export const build = series(productionConsoleAlert, clear, parallel(imgMinimization, webfonts, pug, css, javascript, vendor));
 
 export const dev = series(build, parallel(watchFiles, serve, productionConsoleAlert));
 
