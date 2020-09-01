@@ -62,6 +62,23 @@ const buildScripts = () => {
         ];
     }
 
+    //region Demo
+    const rollupOptionsDemo = {
+        input: `${paths.js.src}demo.js`,
+        sourcemap: true,
+        format: 'cjs',
+        plugins: rollupPlugins,
+    };
+
+    rollup(rollupOptionsDemo)
+      .pipe(source('demo.js', paths.js.src))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(sourcemaps.write('.'))
+      .pipe(dest(paths.js.built))
+      .pipe(browserSync.stream());
+    //endregion
+
     const rollupOptions = {
         input: `${paths.js.src}main.js`,
         sourcemap: true,
