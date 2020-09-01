@@ -2,7 +2,7 @@ import browserSync from 'browser-sync';
 import settings from '../config';
 
 const serve = () => browserSync({
-    open: false,
+    open: true,
     server: {
         baseDir: settings.paths.built,
         directory: false
