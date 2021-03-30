@@ -9,6 +9,19 @@
 - gulp build --production
 > Создание итогового проекта с минификацией
 
+## SSL Сертификат
+- Раскомментировать в gulp/tasks/browsersync.js блок с https
+- Перейти в папку src/ssl
+- openssl req -nodes -new -x509 -keyout server.key -out server.cert -days 3650
+- Открыть https://localhost:3000 Пока сертификат не работает
+- Открыть Developer Tools > Security > View Certificate. Картинку сертификата переместить на рабочий стол. И нажать 2 раза
+- Нажать 'Add'
+- Find it in Keychain Access and double click it
+- Expand 'Trust' and change 'When using this certificate' to 'Always trust'.
+- Может потребоваться авторизоваться.
+- Перезапустить gulp
+- Перезапустить браузер
+
 ## Библиотеки
 
 ### Чистая вёрстка
