@@ -1,3 +1,5 @@
+// todo: Нужно переписать
+/*
 import {dest, src} from 'gulp';
 import favicons from 'gulp-favicons';
 import settings from '../config';
@@ -23,3 +25,4 @@ const generateFavicon = () =>
         .pipe(dest(paths.favicon.built));
 
 export default generateFavicon;
+ */

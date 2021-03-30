@@ -4,8 +4,10 @@ export default {
         templates: 'src/templates/',
         blocks: 'src/blocks/',
         favicon: {
-            src: 'src/favicon/logo.*',
-            built: 'built/favicon',
+            src: 'src/favicon/',
+            srcSimple: 'src/faviconSimple/',
+            built: 'built/favicon/',
+            builtSimple: 'built/',
         },
         fonts: {
             src: 'src/fonts/',
