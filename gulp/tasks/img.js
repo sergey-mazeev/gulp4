@@ -30,7 +30,8 @@ export const img = () =>
 
 export const imgMinimization = (done) => {
     src(`${paths.img.src}**/*.{jpg,png,svg,gif}`)
-        .pipe(imgMin(imgMinOptions))
+        // .pipe(imgMin(imgMinOptions))
+        .pipe(gulpif(production, imgMin(imgMinOptions), changed(paths.img.built)))
         .pipe(dest(paths.img.built));
     done();
 };
