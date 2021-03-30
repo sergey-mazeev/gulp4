@@ -1,13 +1,13 @@
 mixin modal_template(addClass, title)
 	section.modal(class=`modal_${addClass}`)
 		.modal__body
-			// далее - необязательные элементы
+			//- далее - необязательные элементы
 			.modal__header
 				if title
 					h5.modal__title= title
 				button.modal__close Закрыть
 			.modal__content
-				// Контент
+				//- Контент
 				if block
 					block
 				else

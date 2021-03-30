@@ -1,3 +1,4 @@
+/*
 const body = document.body;
 
 const lockBodyScroll = () => {
@@ -76,3 +77,4 @@ export const watchScrollY = () => {
     document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
   })
 };
+ */

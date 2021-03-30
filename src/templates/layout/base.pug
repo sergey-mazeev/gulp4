@@ -20,7 +20,8 @@ html(lang='ru')
 		meta(name='apple-mobile-web-app-capable' content='yes')
 		meta(name='apple-mobile-web-app-status-bar-style' content='black-translucent')
 
-		include favicon
+		//- todo: Генерируем и включаем перед релизом
+		//-include favicon
 
 		include vendor
 		each vendorStyle in vendorStyles
@@ -46,8 +47,9 @@ html(lang='ru')
 		each vendorScript in vendorScripts
 			- var attributes = {};
 			- attributes.src = vendorScript[0]
-			- attributes.defer = vendorScript[1] === 'defer' ? 'defer' : 'false';
-			- attributes.async = vendorScript[1] === 'async' ? 'async' : 'false';
+			if vendorScript[1]
+				- attributes.defer = vendorScript[1] === 'defer' ? 'defer' : 'false';
+				- attributes.async = vendorScript[1] === 'async' ? 'async' : 'false';
 			script&attributes(attributes)
 
 		block scripts
