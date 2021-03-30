@@ -35,7 +35,7 @@ export const watchFiles = () => {
     watch(`${paths.templates}**/*.pug`, pugTemplate);
     watch(`${paths.blocks}**/*.scss`, scssBlocksConcat);
     watch(`${paths.scss.src}**/*.scss`, buildCss);
-    watch(`${paths.scss.src}vendor/*.css`, vendorExt);
+    // watch(`${paths.scss.src}vendor/*.css`, vendorExt);
     watch(`${paths.js.src}**/*.js`, javascript);
     watch(`${paths.img.src}**/*.{jpg,png,svg,gif}`, img);
 };

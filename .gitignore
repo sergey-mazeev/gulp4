@@ -1,9 +1,8 @@
 # Custom
 node_modules
 built
-src/templates/layout/blocks.pug
-src/scss/helpers/_blocks.scss
-src/scss/helpers/_blocks.scss.map
+src/templates/layout/generated
+src/scss/generated
 package-lock.json
 yarn.lock
 

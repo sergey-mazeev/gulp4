@@ -18,8 +18,9 @@ export const concatBlocks = () =>
         .pipe(sourcemaps.init())
         .pipe(concat('_blocks.scss'))
         .pipe(sourcemaps.write('.'))
-        .pipe(dest(`${paths.scss.src}helpers/`));
+        .pipe(dest(`${paths.scss.src}generated/`));
 
+// Не используется
 export const vendorExt = () =>
     src(`${paths.scss.src}vendor/*.css`)
         .pipe(rename(function (path) {
@@ -38,6 +39,7 @@ export const buildCss = () =>
         .pipe(gulpif(production, minify()))
         .pipe(dest(`${paths.scss.built}`));
 
-const css = series(concatBlocks, vendorExt, buildCss);
+// const css = series(concatBlocks, vendorExt, buildCss);
+const css = series(concatBlocks, buildCss);
 
 export default css;

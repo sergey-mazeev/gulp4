@@ -27,7 +27,7 @@ export const pugTemplate = () =>
 export const pugBlocksConcat = () =>
     src(`${paths.blocks}**/*.pug`)
         .pipe(concat(`blocks.pug`))
-        .pipe(dest(`${paths.templates}layout/`));
+        .pipe(dest(`${paths.templates}layout/generated/`));
 
 const buildPug = series(pugBlocksConcat, pugTemplate);
 
