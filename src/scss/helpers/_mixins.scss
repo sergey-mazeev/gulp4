@@ -249,9 +249,27 @@
 	$remSize: $size / 16px;
 	@return $remSize * 100%;
 }
-@mixin font-size($size) {
+@function em($pixels, $context: $fontSize) {
+	@if (unitless($pixels)) {
+		$pixels: $pixels * 1px;
+	}
+	
+	@if (unitless($context)) {
+		$context: $context * 1px;
+	}
+	
+	@return $pixels / $context * 1em;
+}
+
+@mixin font-size($size, $fontBase) {
 	font-size: $size;
-	font-size: calculatePecent($size);
+	//font-size: calculatePecent($size);
+	@if ($fontBase) {
+		font-size: em($size, $fontBase);
+	}
+	@else {
+		font-size: em($size);
+	}
 }
 @mixin trnsfrm($params...) {
 	-webkit-transform: $params;
