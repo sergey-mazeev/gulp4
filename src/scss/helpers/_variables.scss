@@ -2,12 +2,14 @@
 $arial: Arial, sans-serif;
 $font_base: "Roboto", "Helvetica", $arial;
 $fontSize: 16;
-//$font_second: "HarmoniaSansProCyr";
 
 // grid
 $containerPadding: 15px;
 $container: 1440px + $containerPadding*2; // That's where fluid becomes fixed
 $base-v-margin: 20px; // The mother of all margins. Usually = base line height
+$base-vertical-margin: 30;
+$fa-img-path: "img";
+$line-height-base: 1em;
 
 // media
 $media_desktop: "screen and (min-width: 1024px)"; // 1024-∞

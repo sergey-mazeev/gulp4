@@ -204,10 +204,6 @@
 		@content;
 	}
 }
-@mixin pie() {
-	behavior: url("./css/pie/pie.htc");
-	//- behavior: url("path/to/pie.php");
-}
 @mixin reset() {
 	margin: 0;
 	padding: 0;
@@ -261,7 +257,7 @@
 	@return $pixels / $context * 1em;
 }
 
-@mixin font-size($size, $fontBase) {
+@mixin font-size($size, $fontBase: null) {
 	font-size: $size;
 	//font-size: calculatePecent($size);
 	@if ($fontBase) {
@@ -304,7 +300,7 @@
 	max-width: 100%;
 	height: auto;
 }
-@mixin underline($color: $accent-color, $height: 1px, $position: 1px) {
+@mixin underline($color: $color_accent, $height: 1px, $position: 1px) {
 	position: relative;
 	&::after {
 		content: '';
@@ -447,7 +443,6 @@
 		font-weight: 700;
 		line-height: $burger-width * .6;
 		vertical-align: middle;
-		font-size: 15px;
 		
 		&::before,
 		&::after {
