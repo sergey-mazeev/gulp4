@@ -674,3 +674,13 @@
 	margin-left: $width;
 	margin-right: $width;
 }
+
+@mixin visible {
+	visibility: visible;
+	opacity: 1;
+}
+
+@mixin hidden {
+	visibility: hidden;
+	opacity: 0;
+}
