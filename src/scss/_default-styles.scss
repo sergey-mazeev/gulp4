@@ -18,6 +18,17 @@ img {
 	height: auto;
 }
 
+a {
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+b, strong {
+	font-weight: 700;
+}
+
 .container {
 	max-width: $container;
 	padding-left: $containerPadding;
