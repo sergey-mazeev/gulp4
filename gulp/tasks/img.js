@@ -10,7 +10,6 @@ import {production} from '../../gulpfile.babel';
 import {bitrixFlag} from "../../gulpfile.babel";
 
 const {paths} = settings;
-const builtPath = bitrixFlag ? paths.img.bitrix : paths.img.built;
 
 const imgMinOptions = {
     optimizationLevel: 5,
@@ -27,16 +26,16 @@ const imgMinOptions = {
 
 export const img = () =>
     src(`${paths.img.src}**/*.{jpg,png,svg,gif}`)
-        .pipe(gulpif(production, imgMin(imgMinOptions), changed(builtPath)))
+        .pipe(gulpif(production, imgMin(imgMinOptions), changed(bitrixFlag ? paths.img.bitrix : paths.img.built)))
         .pipe(dest(paths.img.temp))
-        .pipe(dest(builtPath));
+        .pipe(dest(bitrixFlag ? paths.img.bitrix : paths.img.built));
 
 export const imgMinimization = (done) => {
     src(`${paths.img.src}**/*.{jpg,png,svg,gif}`)
         // .pipe(imgMin(imgMinOptions))
-        .pipe(gulpif(production, imgMin(imgMinOptions), changed(builtPath)))
+        .pipe(gulpif(production, imgMin(imgMinOptions), changed(bitrixFlag ? paths.img.bitrix : paths.img.built)))
         .pipe(dest(paths.img.temp))
-        .pipe(dest(builtPath));
+        .pipe(dest(bitrixFlag ? paths.img.bitrix : paths.img.built));
     done();
 };
 

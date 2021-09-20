@@ -1,4 +1,3 @@
-import fs from 'fs';
 import browserSync from 'browser-sync';
 import settings from '../config';
 import {bitrixFlag} from "../../gulpfile.babel";
@@ -7,8 +6,8 @@ const serve = () => browserSync({
     open: true,
     server: {
         baseDir: bitrixFlag ? '../' : 'built',
-        directory: false,
-        index: bitrixFlag ? './scaffold/built/index.html' : '/index.html',
+        directory: bitrixFlag,
+        index: '/index.html',
     },
     // При необходимости
     // https: {

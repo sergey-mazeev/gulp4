@@ -15,9 +15,7 @@ import babel from '@rollup/plugin-babel';
 import browserSync from 'browser-sync';
 
 import settings from '../config';
-import {babelFlag, production} from '../../gulpfile.babel';
-import {bitrixFlag} from "../../gulpfile.babel";
-const builtPath = bitrixFlag ? paths.js.bitrix : paths.js.built;
+import {babelFlag, production, bitrixFlag} from '../../gulpfile.babel';
 
 const paths = settings.paths;
 
@@ -84,7 +82,7 @@ const buildScripts = () => {
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(sourcemaps.write('.'))
         // .pipe(terser({ keep_fnames: true, mangle: false }))
-        .pipe(dest(builtPath))
+        .pipe(dest(bitrixFlag ? paths.js.bitrix : paths.js.built))
         .pipe(browserSync.stream());
 };
 
