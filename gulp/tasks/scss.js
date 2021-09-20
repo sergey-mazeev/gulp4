@@ -11,7 +11,11 @@ import settings from '../config';
 import {production} from '../../gulpfile.babel';
 
 const {paths} = settings;
-scss.compiler = require('node-sass');
+//scss.compiler = require('node-sass');
+
+import dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+const sass = gulpSass( dartSass );
 
 export const concatBlocks = () =>
     src(`${paths.blocks}**/*.scss`)
@@ -31,7 +35,7 @@ export const vendorExt = () =>
 export const buildCss = () =>
     src(['*.scss', '!_*.scss', 'helpers/*.scss', '!helpers/_*.scss'], {cwd: paths.scss.src})
         .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(scss().on('error', scss.logError))
+        .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write('./maps'))
         //.pipe(gulpif(production, autoprefixer({
         //    browsers: settings.browsers,
