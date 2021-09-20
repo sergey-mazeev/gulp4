@@ -9,14 +9,15 @@ import resolve from 'rollup-plugin-node-resolve';
 // import commonjs from 'rollup-plugin-commonjs';
 import commonjs from '@rollup/plugin-commonjs';
 // import minify from 'rollup-plugin-babel-minify';
-import minify from 'rollup-plugin-terser';
-import terser from 'gulp-terser';
+import {terser} from 'rollup-plugin-terser';
 // import babel from 'rollup-plugin-babel';
 import babel from '@rollup/plugin-babel';
 import browserSync from 'browser-sync';
 
 import settings from '../config';
 import {babelFlag, production} from '../../gulpfile.babel';
+import {bitrixFlag} from "../../gulpfile.babel";
+const builtPath = bitrixFlag ? paths.js.bitrix : paths.js.built;
 
 const paths = settings.paths;
 
@@ -35,10 +36,12 @@ const buildScripts = () => {
             babel({
                 exclude: 'node_modules/**',
             }),
-            minify({
-                comments: false,
-                sourceMap: false,
-            })
+            terser({
+                format: {
+                    comments: false,
+                },
+                compress: true,
+            }),
         ]
     } else if (babelFlag) {
         rollupPlugins = [
@@ -67,26 +70,8 @@ const buildScripts = () => {
         ];
     }
 
-    //region Demo
-    const rollupOptionsDemo = {
-        input: `${paths.js.src}demo.js`,
-        output: {sourcemap: true},
-        // sourcemap: true,
-        // format: 'cjs',
-        plugins: rollupPlugins,
-    };
-
-    rollupStream(rollupOptionsDemo)
-      .pipe(source('demo.js', paths.js.src))
-      .pipe(buffer())
-      .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(sourcemaps.write('.'))
-      .pipe(dest(paths.js.built))
-      .pipe(browserSync.stream());
-    //endregion
-
     const rollupOptions = {
-        input: `${paths.js.src}main.js`,
+        input: `${paths.js.src}mainBundle.js`,
         output: {sourcemap: true},
         // sourcemap: true,
         // format: 'cjs',
@@ -94,12 +79,12 @@ const buildScripts = () => {
     };
 
     return rollupStream(rollupOptions)
-        .pipe(source('main.js', paths.js.src))
+        .pipe(source('mainBundle.js', paths.js.src))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(sourcemaps.write('.'))
         // .pipe(terser({ keep_fnames: true, mangle: false }))
-        .pipe(dest(paths.js.built))
+        .pipe(dest(builtPath))
         .pipe(browserSync.stream());
 };
 

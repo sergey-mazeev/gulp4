@@ -21,12 +21,22 @@ const {paths} = settings;
 const argv = yargs.argv;
 export const production = !!argv.production;
 export const babelFlag = !!argv.babel;
+export const bitrixFlag = !!argv.bitrix;
 
 
 const productionConsoleAlert = (cb) => {
     if (production) {
         log(color('=====================', 'MAGENTA'));
         log.info(color('   Production Mode   ', 'CYAN'));
+        log(color('=====================', 'MAGENTA'));
+    }
+    cb();
+};
+
+const bitrixConsoleAlert = (cb) => {
+    if (bitrixFlag) {
+        log(color('=====================', 'MAGENTA'));
+        log.info(color('   Bitrix Mode   ', 'CYAN'));
         log(color('=====================', 'MAGENTA'));
     }
     cb();
@@ -43,8 +53,12 @@ export const watchFiles = () => {
 };
 
 
-export const build = series(productionConsoleAlert, clear, parallel(imgMinimization, webfonts, pug, css, javascript, vendor, faviconSimple));
+export const build = series(productionConsoleAlert, clear, parallel(imgMinimization, webfonts, pug, css, javascript, vendor, faviconSimple), bitrixConsoleAlert);
 
-export const dev = series(build, parallel(watchFiles, serve, productionConsoleAlert));
+export const images = imgMinimization;
+
+export const bitrix = series(productionConsoleAlert,bitrixConsoleAlert, parallel(imgMinimization, webfonts, css, javascript, vendor), parallel(watchFiles, productionConsoleAlert, bitrixConsoleAlert));
+
+export const dev = series(build, parallel(watchFiles, serve, productionConsoleAlert, bitrixConsoleAlert));
 
 export default dev;

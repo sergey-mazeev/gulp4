@@ -8,7 +8,7 @@ import gulpif from 'gulp-if';
 import autoprefixer from 'gulp-autoprefixer';
 
 import settings from '../config';
-import {production} from '../../gulpfile.babel';
+import {production, bitrixFlag} from '../../gulpfile.babel';
 
 const {paths} = settings;
 //scss.compiler = require('node-sass');
@@ -41,7 +41,7 @@ export const buildCss = () =>
         //    browsers: settings.browsers,
         //})))
         .pipe(gulpif(production, minify()))
-        .pipe(dest(`${paths.scss.built}`));
+        .pipe(dest(`${bitrixFlag ? paths.scss.bitrix : paths.scss.built}`));
 
 // const css = series(concatBlocks, vendorExt, buildCss);
 const css = series(concatBlocks, buildCss);

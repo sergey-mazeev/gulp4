@@ -12,26 +12,33 @@ export default {
         fonts: {
             src: 'src/fonts/',
             built: 'built/fonts/',
+            bitrix: '../fonts/',
         },
         scss: {
             src: 'src/scss/',
             built: 'built/css/',
+            bitrix: '../css/',
         },
         cssVendor: {
             src: 'src/scss/vendor/',
             built: 'built/css/vendor/',
+            bitrix: '../css/vendor/',
         },
         js: {
             src: 'src/js/',
             built: 'built/js/',
+            bitrix: '../js/',
         },
         jsVendor: {
             src: 'src/js/vendor/',
             built: 'built/js/vendor/',
+            bitrix: '../js/vendor/',
         },
         img: {
             src: 'src/img/',
             built: 'built/img/',
+            bitrix: '../img/',
+            temp: 'built/img/'
         }
     },
 

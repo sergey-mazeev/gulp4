@@ -7,8 +7,10 @@ import debug from 'gulp-debug';
 
 import settings from '../config';
 import {production} from '../../gulpfile.babel';
+import {bitrixFlag} from "../../gulpfile.babel";
 
 const {paths} = settings;
+const builtPath = bitrixFlag ? paths.img.bitrix : paths.img.built;
 
 const imgMinOptions = {
     optimizationLevel: 5,
@@ -25,14 +27,16 @@ const imgMinOptions = {
 
 export const img = () =>
     src(`${paths.img.src}**/*.{jpg,png,svg,gif}`)
-        .pipe(gulpif(production, imgMin(imgMinOptions), changed(paths.img.built)))
-        .pipe(dest(paths.img.built));
+        .pipe(gulpif(production, imgMin(imgMinOptions), changed(builtPath)))
+        .pipe(dest(paths.img.temp))
+        .pipe(dest(builtPath));
 
 export const imgMinimization = (done) => {
     src(`${paths.img.src}**/*.{jpg,png,svg,gif}`)
         // .pipe(imgMin(imgMinOptions))
-        .pipe(gulpif(production, imgMin(imgMinOptions), changed(paths.img.built)))
-        .pipe(dest(paths.img.built));
+        .pipe(gulpif(production, imgMin(imgMinOptions), changed(builtPath)))
+        .pipe(dest(paths.img.temp))
+        .pipe(dest(builtPath));
     done();
 };
 
